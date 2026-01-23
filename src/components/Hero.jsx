@@ -91,7 +91,7 @@ function Hero() {
             </div>
 
             {/* Actions */}
-            <div className="hero__cv w-full md:w-auto text-center space-y-3 md:space-y-4 z-10">
+            {/* <div className="hero__cv w-full md:w-auto text-center space-y-3 md:space-y-4 z-10">
                 <a href={CV} 
                    target='_blank' 
                    rel='noopener noreferrer'
@@ -106,7 +106,7 @@ function Hero() {
                     <span>Me contacter</span>
                     <FaWhatsappSquare className='text-lg md:text-xl' />
                 </button>
-            </div>
+            </div> */}
         </div>
 
         {/* Effets de fond animés */}
