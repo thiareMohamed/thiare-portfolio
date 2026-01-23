@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "THIARE Portfolio",
+  "name": "THIARE Mohamed - Développeur Full-Stack Portfolio",
+  "description": "Portfolio de Mohamed THIARE, Développeur Full-Stack expert en développement web et mobile",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,9 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#0ea5e9",
+  "background_color": "#0a0e1a",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "fr"
 }
