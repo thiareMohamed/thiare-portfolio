@@ -12,7 +12,7 @@ function Nav() {
       setScrolled(window.scrollY > 50);
       
       // Détecter la section active
-      const sections = ['home', 'about', 'services', 'projects', 'skills', 'parcours', 'contact'];
+      const sections = ['home', 'about', 'services', 'projects', 'skills', 'parcours', 'blog', 'contact'];
       const scrollPosition = window.scrollY + 200;
       
       for (const section of sections) {
@@ -40,6 +40,7 @@ function Nav() {
     { href: '#projects', label: 'Projets', id: 'projects' },
     { href: '#skills', label: 'Compétences', id: 'skills' },
     { href: '#parcours', label: 'Parcours', id: 'parcours' },
+    { href: '#blog', label: 'Blog', id: 'blog' },
     { href: '#contact', label: 'Contact', id: 'contact' },
   ];
 

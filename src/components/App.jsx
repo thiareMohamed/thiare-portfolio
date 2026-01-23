@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import '../assets/css/App.css';
 import About from './About';
+import BlogList from './BlogList';
 import Contact from './Contact';
 import Footer from './Footer';
 import Hero from './Hero';
@@ -85,6 +86,9 @@ function App() {
       </section>
       <section id="parcours">
         <Parcours />
+      </section>
+      <section id="blog">
+        <BlogList />
       </section>
       <section id="contact">
         <Contact />
