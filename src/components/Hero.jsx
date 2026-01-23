@@ -1,18 +1,10 @@
 import React from 'react'
-import Nav from './Nav';
-// import { FaLinkedin, FaGithubSquare, FaTwitterSquare, FaCloudDownloadAlt, FaWhatsappSquare } from 'react-icons/fa';
 import { FaLinkedin, FaGithubSquare, FaTwitterSquare } from 'react-icons/fa';
 import AvatarAndIcons from '../assets/images/AvatarAndIcons.svg';
-// import CV from '../assets/file/CV_Mohamed_THIARE.pdf';
 
 function Hero() {
-
-    // const openWhatsapp = () => {
-    //     window.open('https://wa.me/221773813060', '_blank');
-    // }
   return (
-    <div className='space-y-16 mb-20 relative overflow-hidden'>
-      <Nav />
+    <div className='space-y-16 mb-20 relative overflow-hidden pt-24 md:pt-32'>
 
         <div className="hero flex flex-col md:flex-row items-center justify-around space-y-6 md:space-y-0 md:space-x-8 px-4 md:px-8">
             {/* Avatar Mobile */}

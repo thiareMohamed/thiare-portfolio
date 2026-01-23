@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { FaBars, FaTimes, FaWhatsappSquare } from 'react-icons/fa'
 import logo from '../assets/images/logo.svg';
 
@@ -6,22 +7,36 @@ function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const location = useLocation();
 
   useEffect(() => {
+    // Réinitialiser la section active selon la route
+    if (location.pathname === '/blog') {
+      setActiveSection('blog');
+      setScrolled(window.scrollY > 50);
+      return;
+    }
+    
+    if (location.pathname === '/') {
+      setActiveSection('home');
+    }
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
       
-      // Détecter la section active
-      const sections = ['home', 'about', 'services', 'projects', 'skills', 'parcours', 'blog', 'contact'];
-      const scrollPosition = window.scrollY + 200;
-      
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
+      // Détecter la section active (seulement sur la page d'accueil)
+      if (location.pathname === '/') {
+        const sections = ['home', 'about', 'services', 'projects', 'skills', 'parcours', 'contact'];
+        const scrollPosition = window.scrollY + 200;
+        
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const { offsetTop, offsetHeight } = element;
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+              setActiveSection(section);
+              break;
+            }
           }
         }
       }
@@ -31,28 +46,42 @@ function Nav() {
     handleScroll(); // Appel initial
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   const navItems = [
-    { href: '#home', label: 'Accueil', id: 'home' },
-    { href: '#about', label: 'À propos', id: 'about' },
-    { href: '#services', label: 'Services', id: 'services' },
-    { href: '#projects', label: 'Projets', id: 'projects' },
-    { href: '#skills', label: 'Compétences', id: 'skills' },
-    { href: '#parcours', label: 'Parcours', id: 'parcours' },
-    { href: '#blog', label: 'Blog', id: 'blog' },
-    { href: '#contact', label: 'Contact', id: 'contact' },
+    { href: '/', label: 'Accueil', id: 'home', isRoute: true },
+    { href: '#about', label: 'À propos', id: 'about', isRoute: false },
+    { href: '#services', label: 'Services', id: 'services', isRoute: false },
+    { href: '#projects', label: 'Projets', id: 'projects', isRoute: false },
+    { href: '#skills', label: 'Compétences', id: 'skills', isRoute: false },
+    { href: '#parcours', label: 'Parcours', id: 'parcours', isRoute: false },
+    { href: '/blog', label: 'Blog', id: 'blog', isRoute: true },
+    { href: '#contact', label: 'Contact', id: 'contact', isRoute: false },
   ];
 
-  const handleNavClick = (e, href) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      const offsetTop = element.offsetTop - 100;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
+  const handleNavClick = (e, href, isRoute) => {
+    if (isRoute) {
+      // Pour les routes, laisser React Router gérer
+      setMobileMenuOpen(false);
+      // Si on clique sur Accueil depuis une autre page, scroll en haut
+      if (href === '/' && location.pathname === '/') {
+        e?.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
+    }
+    
+    e?.preventDefault();
+    // Pour les ancres, gérer le scroll
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href);
+      if (element) {
+        const offsetTop = element.offsetTop - 100;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
     }
     setMobileMenuOpen(false);
   };
@@ -66,30 +95,59 @@ function Nav() {
       <header className={`glass-effect mx-2 sm:mx-4 md:mx-20 rounded-xl md:rounded-2xl py-2 md:py-3 mt-2 md:mt-3 items-center justify-between px-3 md:px-6 transition-all duration-300 fixed top-0 left-0 right-0 z-50 ${scrolled ? 'shadow-[0_8px_32px_rgba(56,189,248,0.3)] border-sky-400/40 backdrop-blur-xl' : 'border-sky-400/20 backdrop-blur-md'}`}>
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="relative group">
+          <Link to="/" onClick={() => setMobileMenuOpen(false)} className="relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-sky-400/20 to-purple-400/20 rounded-lg blur-sm group-hover:blur-md transition-all duration-300"></div>
             <img src={logo} alt="logo" className="h-5 sm:h-6 md:h-8 relative z-10 drop-shadow-[0_0_10px_rgba(56,189,248,0.5)] transition-transform duration-300 group-hover:scale-110" />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={`text-sm font-medium px-4 py-2 rounded-lg transition-all duration-300 relative group ${
-                  activeSection === item.id
-                    ? 'text-sky-400 bg-sky-400/10'
-                    : 'text-gray-300 hover:text-sky-400'
-                }`}
-              >
-                {item.label}
-                <span className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-sky-400 to-purple-400 transition-all duration-300 ${
-                  activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'
-                }`}></span>
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const isActive = item.isRoute 
+                ? (location.pathname === item.href || (item.href === '/' && location.pathname === '/' && activeSection === 'home'))
+                : activeSection === item.id;
+              
+              if (item.isRoute) {
+                return (
+                  <Link
+                    key={item.id}
+                    to={item.href}
+                    onClick={(e) => handleNavClick(e, item.href, true)}
+                    className={`text-sm font-medium px-4 py-2 rounded-lg transition-all duration-300 relative group ${
+                      isActive
+                        ? 'text-sky-400 bg-sky-400/10'
+                        : 'text-gray-300 hover:text-sky-400'
+                    }`}
+                  >
+                    {item.label}
+                    <span className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-sky-400 to-purple-400 transition-all duration-300 ${
+                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`}></span>
+                  </Link>
+                );
+              }
+              // Ne montrer les ancres que sur la page d'accueil
+              if (location.pathname !== '/') {
+                return null;
+              }
+              return (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href, false)}
+                  className={`text-sm font-medium px-4 py-2 rounded-lg transition-all duration-300 relative group ${
+                    isActive
+                      ? 'text-sky-400 bg-sky-400/10'
+                      : 'text-gray-300 hover:text-sky-400'
+                  }`}
+                >
+                  {item.label}
+                  <span className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-sky-400 to-purple-400 transition-all duration-300 ${
+                    isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}></span>
+                </a>
+              );
+            })}
             
             {/* Bouton Contact */}
             <button
@@ -122,20 +180,46 @@ function Nav() {
           }`}
         >
           <nav className="flex flex-col space-y-2 pb-4">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={`text-base font-medium px-4 py-3 rounded-lg transition-all duration-300 ${
-                  activeSection === item.id
-                    ? 'text-sky-400 bg-sky-400/10 border-l-4 border-sky-400'
-                    : 'text-gray-300 hover:text-sky-400 hover:bg-sky-400/5'
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const isActive = item.isRoute 
+                ? (location.pathname === item.href || (item.href === '/' && location.pathname === '/' && activeSection === 'home'))
+                : activeSection === item.id;
+              
+              if (item.isRoute) {
+                return (
+                  <Link
+                    key={item.id}
+                    to={item.href}
+                    onClick={(e) => handleNavClick(e, item.href, true)}
+                    className={`text-base font-medium px-4 py-3 rounded-lg transition-all duration-300 ${
+                      isActive
+                        ? 'text-sky-400 bg-sky-400/10 border-l-4 border-sky-400'
+                        : 'text-gray-300 hover:text-sky-400 hover:bg-sky-400/5'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              }
+              // Ne montrer les ancres que sur la page d'accueil
+              if (location.pathname !== '/') {
+                return null;
+              }
+              return (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href, false)}
+                  className={`text-base font-medium px-4 py-3 rounded-lg transition-all duration-300 ${
+                    isActive
+                      ? 'text-sky-400 bg-sky-400/10 border-l-4 border-sky-400'
+                      : 'text-gray-300 hover:text-sky-400 hover:bg-sky-400/5'
+                  }`}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
             <button
               onClick={() => {
                 openWhatsapp();

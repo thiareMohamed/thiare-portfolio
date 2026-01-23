@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaCalendarAlt, FaClock, FaTag, FaArrowRight } from 'react-icons/fa';
+import { FaCalendarAlt, FaClock, FaArrowRight } from 'react-icons/fa';
 import { Articles } from '../assets/data/articles';
 import BlogPost from './BlogPost';
 
