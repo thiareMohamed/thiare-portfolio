@@ -56,7 +56,7 @@ function About() {
                     <p className='text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed space-y-2 md:space-y-3'>   
                         <span className='block'>👋 Je m'appelle Mohamed THIARE, mais vous pouvez simplement m'appeler THIARE. Wollah!</span>
 
-                        <span className='block'>👨‍💻 Développeur Full-Stack avec plus de 3 ans d'expérience, je développe et programme des interfaces et propose des solutions web et mobiles.</span>
+                        <span className='block'>👨‍💻 Développeur Full-Stack avec plus de 4 ans d'expérience, je développe et programme des interfaces et propose des solutions web et mobiles.</span>
                         <span className='block'>🎓 Titulaire d'un Master en Génie Logiciel à l'Institut Supérieur d'Informatique de Dakar, certifié Développeur Web et Mobile à Simplon Sénégal, et diplômé en Informatique de gestion à Ensup Afrique.</span>
                         <span className='block'>💡 Spécialisé dans le développement web (Angular, Vue.js, Next.js, Nuxt.js), mobile (Flutter), backend (Spring Boot, Nest.js), et passionné par l'architecture logicielle et le DevOps.</span>
                         <span className='block'>🏢 J'ai travaillé sur des projets majeurs comme le portail du Marché Public du Sénégal, Topatoko, ViziPass, et j'ai dirigé des équipes de développement.</span>
