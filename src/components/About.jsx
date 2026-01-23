@@ -15,7 +15,7 @@ function About() {
                     <div className='mb-3 md:mb-4 transform group-hover:scale-110 transition-transform duration-300'>
                         <img src={ProjectsIcon} alt='ProjectsIcon' className='m-auto w-12 h-12 md:w-16 md:h-16 drop-shadow-[0_0_15px_rgba(56,189,248,0.5)]' />
                     </div>
-                    <span className='text-xs md:text-sm text-sky-400 font-semibold block mb-2'>3+ ans</span>
+                    <span className='text-xs md:text-sm text-sky-400 font-semibold block mb-2'>4+ ans</span>
                     <h3 className='text-xl md:text-2xl font-bold gradient-text' style={{fontFamily: 'Orbitron, sans-serif'}}>Expérience</h3>
                 </div>
 
