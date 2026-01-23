@@ -19,7 +19,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "check-articles": "node -e \"const fs = require('fs'); const files = fs.readdirSync('public/articles').filter(f => f.endsWith('.md')); console.log('📚 Articles trouvés:', files.length); files.forEach(f => console.log('  -', f));\""
   },
   "eslintConfig": {
     "extends": [
