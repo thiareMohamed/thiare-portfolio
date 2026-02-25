@@ -9,6 +9,8 @@ import LohiFoundationImage from '../assets/images/lohifoundation.png';
 import VisionStatsImage from '../assets/images/vision_stats.png';
 import BookfightersImage from '../assets/images/bookfighters.png';
 import SenumImage from '../assets/images/senum.png';
+import SamaGokh from '../assets/images/samagokh.png';
+import Pharmacy from '../assets/images/pharmacy.png';
 
 function CardProject(props) {
     const value = props.value;
@@ -24,6 +26,8 @@ function CardProject(props) {
       6: VisionStatsImage,
       5: BookfightersImage,
       7: SenumImage,
+      8: SamaGokh,
+      9: Pharmacy
     };
 
     // Fonction pour obtenir l'image du projet
@@ -76,7 +80,7 @@ function CardProject(props) {
           ))}
         </div>
         <div className='relative rounded-xl overflow-hidden border border-sky-400/20 group-hover:border-sky-400/50 transition-all duration-300 bg-gradient-to-br from-sky-400/10 to-purple-400/10'>
-          {/* <div className='absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-end justify-center pb-4'>
+          <div className='absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-end justify-center pb-4'>
             {value.url && (
               <a 
                 href={value.url} 
@@ -88,7 +92,7 @@ function CardProject(props) {
                 Voir le projet →
               </a>
             )}
-          </div> */}
+          </div>
           <img 
             src={projectImage}
             alt={value.title || 'Project'} 

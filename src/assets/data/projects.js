@@ -3,7 +3,7 @@ module.exports.Projects = [
         id: 1,
         title: 'Topatoko',
         description: 'Plateforme tout-en-un de dématérialisation pour digitaliser vos documents, automatiser vos workflows et sécuriser vos signatures électroniques. Signature électronique sécurisée, workflow automatisé, conformité internationale et intégration facile.',
-        url: null,
+        url: 'https://topatoko.com',
         // Pour utiliser une image locale, ajoutez l'image dans src/assets/images/ et utilisez: image: '/src/assets/images/topatoko.png'
         image: '../assets/images/topatoko.png',
         category: 'Plateforme SaaS',
@@ -13,7 +13,7 @@ module.exports.Projects = [
         id: 2,
         title: 'ViziPass - Building Administratif',
         description: 'Système d\'identification sans contact et par carte à puce pour les visiteurs du Building Administratif. Solution moderne et efficace offrant un accès facile et sécurisé avec gestion des visites, module de gestion d\'événements et plateforme de démarches administratives complète.',
-        url: null,
+        url: 'https://vizi-pass.com',
         // Pour utiliser une image locale, ajoutez l'image dans src/assets/images/ et utilisez: image: '/src/assets/images/vizipass.png'
         image: '../assets/images/vizi_pass.png',
         category: 'Sécurité & Administration',
@@ -23,7 +23,7 @@ module.exports.Projects = [
         id: 3,
         title: 'Portail Marché Public du Sénégal (APPEL)',
         description: 'Refonte complète du portail APPEL - Portail de la commande publique du Sénégal. Plateforme centrale pour les fournisseurs et acteurs des marchés publics. Système de gestion des autorités contractantes, consultations, plans de passation, clone Trello pour gestion de tâches, système de dénonciation anonyme, génération automatique de PV de carence et chat en temps réel avec agents.',
-        url: null,
+        url: 'https://esigmap.sn',
         // Pour utiliser une image locale, ajoutez l'image dans src/assets/images/ et utilisez: image: '/src/assets/images/marche-public-senegal.png'
         image: '../assets/images/marche-public.png',
         category: 'Gouvernement',
@@ -33,7 +33,7 @@ module.exports.Projects = [
         id: 4,
         title: 'Lohi Foundation',
         description: 'Plateforme de gestion de projets communautaires avec dashboards personnalisés. Gestion des promoteurs, témoignages et utilisateurs. Migration d\'Angular vers Nuxt 3. Site web pour la Better Living Tonkpi Lohi Foundation.',
-        url: null,
+        url: 'https://www.lohifoundation.com/',
         // Pour utiliser une image locale, ajoutez l'image dans src/assets/images/ et utilisez: image: '/src/assets/images/lohi-foundation.png'
         image: '../assets/images/lohifoundation.png',
         category: 'Gestion de Projets',
@@ -62,8 +62,25 @@ module.exports.Projects = [
         id: 7,
         title: 'Plateforme de Démarches Administratives',
         description: 'Système complet de gestion des démarches administratives avec authentification sécurisée, workflow de validation et suivi en temps réel des dossiers.',
-        url: '../assets/images/senum.png',
+        url: 'https://www.senegalservices.sn',
         category: 'Administration',
         stacks: ['Nest.js', 'Angular', 'MongoDB', 'Keycloak', 'Docker']
+    },
+    {
+        id: 8,
+        title: 'Plateforme citoyenne en ligne',
+        description: 'Le site Sama Gokh est une plateforme citoyenne en ligne destinée à faciliter le signalement, le suivi et la gestion des problèmes ou préoccupations dans l’environnement et la communauté.',
+        image: '../assets/images/samagokh.png',
+        url: 'https://samagokh.sn',
+        category: 'Citoyenne',
+        stacks: ['Nuxt.js']
+    },
+    {
+        id: 9,
+        title: 'Pharmacies de Garde',
+        description: 'Application web permettant aux citoyens de consulter facilement les pharmacies de garde disponibles en dehors des horaires habituels. Le projet vise à améliorer l’accès rapide aux services pharmaceutiques d’urgence en centralisant les informations essentielles (nom de la pharmacie, localisation, période de garde).',
+        url: 'https://on-call-pharmacy.vercel.app/',
+        category: 'Citoyenne',
+        stacks: ['Nuxt.js', 'Supabase']
     }
 ]
