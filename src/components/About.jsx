@@ -5,67 +5,87 @@ import CodeIcon from '../assets/images/CodeIcon.svg'
 import ThiarePhoto from '../assets/images/ThiarePhoto.jfif'
 
 function About() {
+  const qualites = [
+    "Esprit d'équipe & communication",
+    'Résolution de problèmes',
+    'Autonomie & rigueur',
+    'Adaptabilité continue',
+    'Leadership & initiative',
+    'Gestion du stress',
+  ];
+
   return (
     <div className='relative py-20'>
-        {/* Stats Cards */}
-        <div className='border-y-2 border-sky-500/30 px-4 md:px-30 py-10 sm:py-10 relative overflow-hidden'>
-            <div className='absolute inset-0 bg-gradient-to-r from-sky-400/5 via-purple-400/5 to-pink-400/5'></div>
-            <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 justify-center items-center px-4 sm:px-10 py-5 mt-10 relative z-10'>
-                <div className='text-center glass-effect border-2 rounded-xl md:rounded-2xl border-sky-400/30 p-6 md:p-8 hover-lift hover:border-sky-400/60 transition-all duration-300 group'>
-                    <div className='mb-3 md:mb-4 transform group-hover:scale-110 transition-transform duration-300'>
-                        <img src={ProjectsIcon} alt='ProjectsIcon' className='m-auto w-12 h-12 md:w-16 md:h-16 drop-shadow-[0_0_15px_rgba(56,189,248,0.5)]' />
-                    </div>
-                    <span className='text-xs md:text-sm text-sky-400 font-semibold block mb-2'>4+ ans</span>
-                    <h3 className='text-xl md:text-2xl font-bold gradient-text' style={{fontFamily: 'Orbitron, sans-serif'}}>Expérience</h3>
-                </div>
-
-                <div className='text-center glass-effect border-2 rounded-xl md:rounded-2xl border-purple-400/40 p-6 md:p-8 bg-gradient-to-br from-purple-400/20 to-sky-400/20 hover-lift hover:border-purple-400/70 transition-all duration-300 group'>
-                    <div className='mb-3 md:mb-4 transform group-hover:scale-110 transition-transform duration-300'>
-                        <img src={CodeIcon} alt='CodeIcon' className='m-auto w-12 h-12 md:w-16 md:h-16 drop-shadow-[0_0_15px_rgba(147,51,234,0.5)]' />
-                    </div>
-                    <span className='text-xs md:text-sm text-purple-400 font-semibold block mb-2'>10+ projets</span>
-                    <h3 className='text-xl md:text-2xl font-bold gradient-text' style={{fontFamily: 'Orbitron, sans-serif'}}>Projets</h3>
-                </div>
-
-                <div className='text-center glass-effect border-2 rounded-xl md:rounded-2xl border-pink-400/30 p-6 md:p-8 hover-lift hover:border-pink-400/60 transition-all duration-300 group'>
-                    <div className='mb-3 md:mb-4 transform group-hover:scale-110 transition-transform duration-300'>
-                        <img src={DesignIcon} alt='DesignIcon' className='m-auto w-12 h-12 md:w-16 md:h-16 drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]' />
-                    </div>
-                    <span className='text-xs md:text-sm text-pink-400 font-semibold block mb-2'>Full-Stack</span>
-                    <h3 className='text-xl md:text-2xl font-bold gradient-text' style={{fontFamily: 'Orbitron, sans-serif'}}>Expertise</h3>
-                </div>
+      {/* Stats Cards */}
+      <div className='border-y border-gold/25 px-4 md:px-30 py-10 sm:py-10 relative overflow-hidden'>
+        <div className='absolute inset-0 bg-gradient-to-r from-crimson/5 via-gold/5 to-crimson/5'></div>
+        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 justify-center items-center px-4 sm:px-10 py-5 mt-10 relative z-10'>
+          <div className='text-center glass-effect border rounded-xl md:rounded-2xl border-crimson/30 p-6 md:p-8 hover-lift hover:border-crimson/60 transition-all duration-300 group'>
+            <div className='mb-3 md:mb-4 transform group-hover:scale-110 transition-transform duration-300'>
+              <img src={ProjectsIcon} alt='Expérience' className='m-auto w-12 h-12 md:w-16 md:h-16 drop-shadow-[0_0_15px_rgba(200,16,46,0.5)]' />
             </div>
+            <span className='text-xs md:text-sm text-crimson-light font-semibold block mb-2'>+4 ans</span>
+            <h3 className='text-xl md:text-2xl font-bold gradient-text' style={{ fontFamily: 'Cinzel, serif' }}>Expérience</h3>
+          </div>
+
+          <div className='text-center glass-effect border rounded-xl md:rounded-2xl border-gold/40 p-6 md:p-8 bg-gradient-to-br from-crimson/10 to-gold/10 hover-lift hover:border-gold/70 transition-all duration-300 group'>
+            <div className='mb-3 md:mb-4 transform group-hover:scale-110 transition-transform duration-300'>
+              <img src={CodeIcon} alt='Projets' className='m-auto w-12 h-12 md:w-16 md:h-16 drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]' />
+            </div>
+            <span className='text-xs md:text-sm text-gold font-semibold block mb-2'>15+ projets</span>
+            <h3 className='text-xl md:text-2xl font-bold gradient-text' style={{ fontFamily: 'Cinzel, serif' }}>Réalisations</h3>
+          </div>
+
+          <div className='text-center glass-effect border rounded-xl md:rounded-2xl border-crimson/30 p-6 md:p-8 hover-lift hover:border-crimson/60 transition-all duration-300 group'>
+            <div className='mb-3 md:mb-4 transform group-hover:scale-110 transition-transform duration-300'>
+              <img src={DesignIcon} alt='Leadership' className='m-auto w-12 h-12 md:w-16 md:h-16 drop-shadow-[0_0_15px_rgba(200,16,46,0.5)]' />
+            </div>
+            <span className='text-xs md:text-sm text-crimson-light font-semibold block mb-2'>Lead Tech</span>
+            <h3 className='text-xl md:text-2xl font-bold gradient-text' style={{ fontFamily: 'Cinzel, serif' }}>Leadership</h3>
+          </div>
+        </div>
+      </div>
+
+      {/* About Section */}
+      <div className='flex flex-col sm:flex-row sm:justify-around sm:items-center p-6 sm:p-10 md:p-20 relative'>
+        <div className='relative mb-6 sm:mb-0 mx-auto sm:mx-0'>
+          <div className='absolute inset-0 rising-sun rounded-full blur-2xl opacity-50 animate-[pulse-soft_5s_ease-in-out_infinite]'></div>
+          <div className='relative border-2 md:border-4 border-gold/50 rounded-full p-1.5 md:p-2 hover:border-crimson transition-all duration-300 hover:scale-105'>
+            <img src={ThiarePhoto} alt="Mohamed THIARE" className='rounded-full w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 object-cover drop-shadow-[0_0_30px_rgba(200,16,46,0.5)]' />
+          </div>
+          <span className='hanko absolute -bottom-2 -right-2 w-12 h-12 text-lg rotate-6' aria-hidden="true">武</span>
         </div>
 
-        {/* About Section */}
-        <div className='flex flex-col sm:flex-row sm:justify-around sm:items-center p-6 sm:p-10 md:p-20 relative'>
-            <div className='relative mb-6 sm:mb-0 mx-auto sm:mx-0'>
-                <div className='absolute inset-0 bg-gradient-to-r from-sky-400/30 to-purple-400/30 rounded-full blur-3xl animate-pulse'></div>
-                <div className='relative border-2 md:border-4 border-sky-400/50 rounded-full p-1.5 md:p-2 hover:border-sky-400 transition-all duration-300 hover:scale-105'>
-                    <img src={ThiarePhoto} alt="ThiarePhoto" className='rounded-full w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 object-cover drop-shadow-[0_0_30px_rgba(56,189,248,0.5)]' />
-                </div>
-            </div>
-            <div className='w-full sm:w-1/2 sm:px-4 md:px-8 sm:py-2 mt-6 sm:mt-10 space-y-4 sm:space-y-6'>
-                <span className="inline-block glass-effect text-sky-400 text-xs md:text-sm font-bold px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-sky-400/30">
-                    🧐 A propos
+        <div className='w-full sm:w-1/2 sm:px-4 md:px-8 sm:py-2 mt-6 sm:mt-10 space-y-4 sm:space-y-6'>
+          <span className="inline-block glass-effect text-gold text-xs md:text-sm font-bold px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-gold/30">
+            🥷 À propos · 自己紹介
+          </span>
+          <h2 className='text-3xl sm:text-4xl md:text-5xl font-bold gradient-text text-center sm:text-left brush-underline' style={{ fontFamily: 'Cinzel, serif' }}>
+            Mohamed THIARE
+          </h2>
+          <div className='glass-effect rounded-xl md:rounded-2xl p-4 md:p-6 border border-gold/20 hover:border-crimson/40 transition-all duration-300'>
+            <p className='text-xs sm:text-sm md:text-base text-washi/80 leading-relaxed space-y-2 md:space-y-3'>
+              <span className='block'>⚔️ Développeur <span className='text-crimson-light font-semibold'>Full-Stack</span> et <span className='text-gold font-semibold'>Lead Tech</span> expérimenté, spécialisé dans la conception et le déploiement d'architectures web et mobiles modernes, robustes et scalables.</span>
+              <span className='block'>🗾 Expertise marquée sur les écosystèmes JavaScript (<span className='text-crimson-light'>Nuxt.js, NestJS, Angular</span>) et <span className='text-crimson-light'>Java / Spring Boot</span>.</span>
+              <span className='block'>🏯 Habitué à piloter des équipes et à mener des projets complexes de bout en bout, de la vision business jusqu'à la mise en production.</span>
+              <span className='block'>🎓 Master en Génie Logiciel (ISI Dakar), certifié Développeur Web & Mobile (Simplon Sénégal), Licence en Informatique & Gestion (Ensup Afrique).</span>
+            </p>
+          </div>
+
+          {/* Qualités */}
+          <div className='glass-effect rounded-xl md:rounded-2xl p-4 md:p-6 border border-crimson/20'>
+            <h4 className='text-gold font-semibold mb-3 text-sm md:text-base' style={{ fontFamily: '"Shippori Mincho", serif' }}>Mes valeurs · 美徳</h4>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-2'>
+              {qualites.map((q, i) => (
+                <span key={i} className='flex items-start text-xs sm:text-sm text-washi/80'>
+                  <span className='text-crimson-light mr-2 mt-0.5 flex-shrink-0'>⛩</span>
+                  {q}
                 </span>
-                <h1 className='text-3xl sm:text-4xl md:text-5xl font-bold gradient-text text-center sm:text-left' style={{fontFamily: 'Orbitron, sans-serif'}}>
-                    THIARE Mohamed
-                </h1>
-                <div className='glass-effect rounded-xl md:rounded-2xl p-4 md:p-6 border border-sky-400/20 hover:border-sky-400/40 transition-all duration-300'>
-                    <p className='text-xs sm:text-sm md:text-base text-gray-300 leading-relaxed space-y-2 md:space-y-3'>   
-                        <span className='block'>👋 Je m'appelle Mohamed THIARE, mais vous pouvez simplement m'appeler THIARE. Wollah!</span>
-
-                        <span className='block'>👨‍💻 Développeur Full-Stack avec plus de 4 ans d'expérience, je développe et programme des interfaces et propose des solutions web et mobiles.</span>
-                        <span className='block'>🎓 Titulaire d'un Master en Génie Logiciel à l'Institut Supérieur d'Informatique de Dakar, certifié Développeur Web et Mobile à Simplon Sénégal, et diplômé en Informatique de gestion à Ensup Afrique.</span>
-                        <span className='block'>💡 Spécialisé dans le développement web (Angular, Vue.js, Next.js, Nuxt.js), mobile (Flutter), backend (Spring Boot, Nest.js), et passionné par l'architecture logicielle et le DevOps.</span>
-                        <span className='block'>🏢 J'ai travaillé sur des projets majeurs comme le portail du Marché Public du Sénégal, Topatoko, ViziPass, et j'ai dirigé des équipes de développement.</span>
-                         
-                        <span className='block'>🚀 J'essaie de toujours apprendre de nouvelles choses, que ce soit en développement web, mobile, DevOps ou en gestion de projet.</span>
-                    </p>
-                </div>
+              ))}
             </div>
+          </div>
         </div>
+      </div>
     </div>
   )
 }

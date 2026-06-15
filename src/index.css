@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap');
 
 * {
   margin: 0;
@@ -14,10 +14,13 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #0a0e1a 0%, #1a1f35 50%, #0a0e1a 100%);
+  /* Encre sumi : noir profond avec dégradé chaud */
+  background:
+    radial-gradient(circle at 50% -10%, rgba(200, 16, 46, 0.18) 0%, transparent 45%),
+    linear-gradient(160deg, #0a0807 0%, #14100e 45%, #0d0a09 100%);
   background-attachment: fixed;
-  color: #fff;
-  font-family: 'Rajdhani', sans-serif;
+  color: #f3ead8;
+  font-family: 'Zen Kaku Gothic New', 'Rajdhani', sans-serif;
   overflow-x: hidden;
   position: relative;
   font-size: 16px;
@@ -28,24 +31,37 @@ body {
   body {
     font-size: 14px;
   }
-  
-  /* Réduire les espacements sur mobile */
+
   .space-y-16 > * + * {
     margin-top: 2rem;
   }
 }
 
+/* Motif Seigaiha (vagues japonaises) + grain de papier washi en fond */
 body::before {
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    radial-gradient(circle at 20% 50%, rgba(56, 189, 248, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 100% 50%, transparent 20%, rgba(212, 175, 55, 0.015) 21%, rgba(212, 175, 55, 0.015) 34%, transparent 35%, transparent),
+    radial-gradient(circle at 0% 50%, transparent 20%, rgba(200, 16, 46, 0.02) 21%, rgba(200, 16, 46, 0.02) 34%, transparent 35%, transparent);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Halo rouge "soleil levant" diffus */
+body::after {
+  content: '';
+  position: fixed;
+  top: -25vmax;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70vmax;
+  height: 70vmax;
+  background: radial-gradient(circle, rgba(200, 16, 46, 0.12) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -56,32 +72,24 @@ body::before {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* Animations futuristes */
+/* ===================== ANIMATIONS ===================== */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-20px); }
 }
 
-@keyframes glow {
-  0%, 100% { 
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.5),
-                0 0 40px rgba(56, 189, 248, 0.3),
-                0 0 60px rgba(56, 189, 248, 0.1);
+@keyframes katana-glow {
+  0%, 100% {
+    box-shadow: 0 0 18px rgba(200, 16, 46, 0.45),
+                0 0 36px rgba(200, 16, 46, 0.22);
   }
-  50% { 
-    box-shadow: 0 0 30px rgba(56, 189, 248, 0.8),
-                0 0 60px rgba(56, 189, 248, 0.5),
-                0 0 90px rgba(56, 189, 248, 0.3);
+  50% {
+    box-shadow: 0 0 26px rgba(212, 175, 55, 0.6),
+                0 0 52px rgba(212, 175, 55, 0.3);
   }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
 }
 
 @keyframes gradient-shift {
@@ -90,63 +98,128 @@ code {
   100% { background-position: 0% 50%; }
 }
 
-@keyframes border-glow {
-  0%, 100% { 
-    border-color: rgba(56, 189, 248, 0.5);
-    box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
-  }
-  50% { 
-    border-color: rgba(147, 51, 234, 0.8);
-    box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
-  }
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* Classes utilitaires futuristes */
+@keyframes sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+
+/* ===================== UTILITAIRES SAMOURAÏ ===================== */
+
+/* Panneau "washi" sombre, façon papier laqué */
 .glass-effect {
-  background: rgba(255, 255, 255, 0.05);
+  background: linear-gradient(145deg, rgba(36, 28, 24, 0.65), rgba(13, 10, 9, 0.75));
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.18);
 }
 
+/* Texte lumineux rouge/or façon lame */
 .neon-text {
-  text-shadow: 
-    0 0 10px rgba(56, 189, 248, 0.8),
-    0 0 20px rgba(56, 189, 248, 0.6),
-    0 0 30px rgba(56, 189, 248, 0.4);
+  text-shadow:
+    0 0 10px rgba(200, 16, 46, 0.55),
+    0 0 22px rgba(200, 16, 46, 0.3),
+    0 1px 0 rgba(0, 0, 0, 0.6);
 }
 
+/* Dégradé rouge -> or */
 .gradient-text {
-  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+  background: linear-gradient(120deg, #e23b4e 0%, #c8102e 40%, #d4af37 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradient-shift 3s ease infinite;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* Dégradé or pur pour accents nobles */
+.gold-text {
+  background: linear-gradient(120deg, #e6c34d 0%, #d4af37 50%, #9c7c1e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .hover-lift:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(56, 189, 248, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(200, 16, 46, 0.28);
 }
 
-/* Scrollbar personnalisée */
+/* Sceau Hanko (cachet rouge) */
+.hanko {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #c8102e;
+  color: #e23b4e;
+  border-radius: 0.5rem;
+  font-family: 'Shippori Mincho', serif;
+  letter-spacing: 0.1em;
+  background: rgba(200, 16, 46, 0.08);
+}
+
+/* Trait de pinceau sous les titres */
+.brush-underline {
+  position: relative;
+  display: inline-block;
+}
+.brush-underline::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -0.55rem;
+  width: 70%;
+  height: 6px;
+  background: linear-gradient(90deg, transparent, #c8102e 20%, #d4af37 80%, transparent);
+  border-radius: 50%;
+  filter: blur(0.4px);
+  opacity: 0.85;
+}
+
+/* Filigrane Kanji décoratif */
+.kanji-watermark {
+  font-family: 'Shippori Mincho', serif;
+  color: rgba(212, 175, 55, 0.06);
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* Disque "soleil levant" */
+.rising-sun {
+  background: radial-gradient(circle, #e23b4e 0%, #c8102e 55%, #7a0e1e 100%);
+  box-shadow: 0 0 60px rgba(200, 16, 46, 0.5);
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }
-
 ::-webkit-scrollbar-track {
-  background: #0a0e1a;
+  background: #0a0807;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(180deg, #c8102e, #d4af37);
   border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #60a5fa, #a78bfa);
+  background: linear-gradient(180deg, #e23b4e, #e6c34d);
+}
+
+::selection {
+  background: rgba(200, 16, 46, 0.4);
+  color: #f3ead8;
 }

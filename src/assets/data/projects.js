@@ -1,5 +1,13 @@
 module.exports.Projects = [
     {
+        id: 10,
+        title: 'Teralink',
+        description: "Plateforme de réservation en ligne multiplateforme conçue et développée de bout en bout en tant que fondateur. Application web Nuxt 3, backend NestJS couplé à PostgreSQL, application mobile native Flutter et stockage objet sécurisé via MinIO.",
+        url: 'https://teralink.sn',
+        category: 'Plateforme · Fondateur',
+        stacks: ['Nuxt 3', 'NestJS', 'Flutter', 'PostgreSQL', 'MinIO']
+    },
+    {
         id: 1,
         title: 'Topatoko',
         description: 'Plateforme tout-en-un de dématérialisation pour digitaliser vos documents, automatiser vos workflows et sécuriser vos signatures électroniques. Signature électronique sécurisée, workflow automatisé, conformité internationale et intégration facile.',

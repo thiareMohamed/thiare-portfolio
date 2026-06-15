@@ -7,7 +7,7 @@ import Blog from '../pages/Blog';
 function App() {
   // SEO - Titre par défaut
   useEffect(() => {
-    document.title = 'THIARE Mohamed - Développeur Full-Stack | Portfolio';
+    document.title = 'Mohamed THIARE - Lead Tech & Développeur Full-Stack | Portfolio';
     
     // Ajouter les données structurées JSON-LD pour le SEO
     const script = document.createElement('script');
@@ -16,7 +16,7 @@ function App() {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Mohamed THIARE",
-      "jobTitle": "Développeur Full-Stack",
+      "jobTitle": "Lead Tech & Développeur Full-Stack",
       "url": "https://thiare-portfolio.vercel.app",
       "sameAs": [
         "https://www.linkedin.com/in/mohamed-thiare-b49b03214/",
@@ -35,18 +35,26 @@ function App() {
         "name": "Institut Supérieur d'Informatique"
       },
       "knowsAbout": [
+        "Lead Tech",
+        "Architecture logicielle",
         "Développement Web",
         "Développement Mobile",
-        "Angular",
-        "React",
-        "Vue.js",
-        "Next.js",
         "Nuxt.js",
+        "Next.js",
+        "Angular",
+        "Vue.js",
+        "React",
         "Flutter",
+        "NestJS",
         "Spring Boot",
-        "Nest.js",
-        "JavaScript",
-        "TypeScript",
+        "Java",
+        "Kafka",
+        "PostgreSQL",
+        "MongoDB",
+        "MinIO",
+        "Docker",
+        "Portainer",
+        "CI/CD",
         "DevOps"
       ]
     });
