@@ -16,19 +16,19 @@ function Nav() {
       setScrolled(window.scrollY > 50);
       return;
     }
-    
+
     if (location.pathname === '/') {
       setActiveSection('home');
     }
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-      
+
       // Détecter la section active (seulement sur la page d'accueil)
       if (location.pathname === '/') {
         const sections = ['home', 'about', 'services', 'projects', 'skills', 'parcours', 'contact'];
         const scrollPosition = window.scrollY + 200;
-        
+
         for (const section of sections) {
           const element = document.getElementById(section);
           if (element) {
@@ -41,10 +41,10 @@ function Nav() {
         }
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Appel initial
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, [location.pathname]);
 
@@ -61,18 +61,15 @@ function Nav() {
 
   const handleNavClick = (e, href, isRoute) => {
     if (isRoute) {
-      // Pour les routes, laisser React Router gérer
       setMobileMenuOpen(false);
-      // Si on clique sur Accueil depuis une autre page, scroll en haut
       if (href === '/' && location.pathname === '/') {
         e?.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
       return;
     }
-    
+
     e?.preventDefault();
-    // Pour les ancres, gérer le scroll
     if (href.startsWith('#')) {
       const element = document.querySelector(href);
       if (element) {
@@ -92,21 +89,22 @@ function Nav() {
 
   return (
     <>
-      <header className={`glass-effect mx-2 sm:mx-4 md:mx-20 rounded-xl md:rounded-2xl py-2 md:py-3 mt-2 md:mt-3 items-center justify-between px-3 md:px-6 transition-all duration-300 fixed top-0 left-0 right-0 z-50 ${scrolled ? 'shadow-[0_8px_32px_rgba(56,189,248,0.3)] border-sky-400/40 backdrop-blur-xl' : 'border-sky-400/20 backdrop-blur-md'}`}>
+      <header className={`glass-effect mx-2 sm:mx-4 md:mx-20 rounded-xl md:rounded-2xl py-2 md:py-3 mt-2 md:mt-3 items-center justify-between px-3 md:px-6 transition-all duration-300 fixed top-0 left-0 right-0 z-50 ${scrolled ? 'shadow-[0_8px_32px_rgba(200,16,46,0.3)] border-gold/40 backdrop-blur-xl' : 'border-gold/20 backdrop-blur-md'}`}>
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" onClick={() => setMobileMenuOpen(false)} className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-r from-sky-400/20 to-purple-400/20 rounded-lg blur-sm group-hover:blur-md transition-all duration-300"></div>
-            <img src={logo} alt="logo" className="h-5 sm:h-6 md:h-8 relative z-10 drop-shadow-[0_0_10px_rgba(56,189,248,0.5)] transition-transform duration-300 group-hover:scale-110" />
+          <Link to="/" onClick={() => setMobileMenuOpen(false)} className="relative group flex items-center gap-2">
+            <div className="absolute inset-0 bg-gradient-to-r from-crimson/20 to-gold/20 rounded-lg blur-sm group-hover:blur-md transition-all duration-300"></div>
+            <span className="hanko text-base sm:text-lg w-8 h-8 sm:w-9 sm:h-9 relative z-10 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">侍</span>
+            <img src={logo} alt="logo" className="h-5 sm:h-6 md:h-8 relative z-10 drop-shadow-[0_0_10px_rgba(200,16,46,0.5)] transition-transform duration-300 group-hover:scale-110" />
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => {
-              const isActive = item.isRoute 
+              const isActive = item.isRoute
                 ? (location.pathname === item.href || (item.href === '/' && location.pathname === '/' && activeSection === 'home'))
                 : activeSection === item.id;
-              
+
               if (item.isRoute) {
                 return (
                   <Link
@@ -115,18 +113,17 @@ function Nav() {
                     onClick={(e) => handleNavClick(e, item.href, true)}
                     className={`text-sm font-medium px-4 py-2 rounded-lg transition-all duration-300 relative group ${
                       isActive
-                        ? 'text-sky-400 bg-sky-400/10'
-                        : 'text-gray-300 hover:text-sky-400'
+                        ? 'text-crimson-light bg-crimson/10'
+                        : 'text-washi/70 hover:text-crimson-light'
                     }`}
                   >
                     {item.label}
-                    <span className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-sky-400 to-purple-400 transition-all duration-300 ${
+                    <span className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-crimson to-gold transition-all duration-300 ${
                       isActive ? 'w-full' : 'w-0 group-hover:w-full'
                     }`}></span>
                   </Link>
                 );
               }
-              // Ne montrer les ancres que sur la page d'accueil
               if (location.pathname !== '/') {
                 return null;
               }
@@ -137,22 +134,22 @@ function Nav() {
                   onClick={(e) => handleNavClick(e, item.href, false)}
                   className={`text-sm font-medium px-4 py-2 rounded-lg transition-all duration-300 relative group ${
                     isActive
-                      ? 'text-sky-400 bg-sky-400/10'
-                      : 'text-gray-300 hover:text-sky-400'
+                      ? 'text-crimson-light bg-crimson/10'
+                      : 'text-washi/70 hover:text-crimson-light'
                   }`}
                 >
                   {item.label}
-                  <span className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-sky-400 to-purple-400 transition-all duration-300 ${
+                  <span className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-crimson to-gold transition-all duration-300 ${
                     isActive ? 'w-full' : 'w-0 group-hover:w-full'
                   }`}></span>
                 </a>
               );
             })}
-            
+
             {/* Bouton Contact */}
             <button
               onClick={openWhatsapp}
-              className="ml-4 glass-effect text-sky-400 hover:text-purple-400 px-4 py-2 rounded-lg border border-sky-400/30 hover:border-sky-400/60 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] flex items-center space-x-2 text-sm font-semibold"
+              className="ml-4 glass-effect text-gold hover:text-crimson-light px-4 py-2 rounded-lg border border-gold/30 hover:border-crimson/60 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(200,16,46,0.4)] flex items-center space-x-2 text-sm font-semibold"
             >
               <FaWhatsappSquare className="text-lg" />
               <span className="hidden xl:inline">Contact</span>
@@ -162,7 +159,7 @@ function Nav() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-sky-400 hover:text-purple-400 transition-colors p-2"
+            className="lg:hidden text-crimson-light hover:text-gold transition-colors p-2"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
@@ -181,10 +178,10 @@ function Nav() {
         >
           <nav className="flex flex-col space-y-2 pb-4">
             {navItems.map((item) => {
-              const isActive = item.isRoute 
+              const isActive = item.isRoute
                 ? (location.pathname === item.href || (item.href === '/' && location.pathname === '/' && activeSection === 'home'))
                 : activeSection === item.id;
-              
+
               if (item.isRoute) {
                 return (
                   <Link
@@ -193,15 +190,14 @@ function Nav() {
                     onClick={(e) => handleNavClick(e, item.href, true)}
                     className={`text-base font-medium px-4 py-3 rounded-lg transition-all duration-300 ${
                       isActive
-                        ? 'text-sky-400 bg-sky-400/10 border-l-4 border-sky-400'
-                        : 'text-gray-300 hover:text-sky-400 hover:bg-sky-400/5'
+                        ? 'text-crimson-light bg-crimson/10 border-l-4 border-crimson'
+                        : 'text-washi/70 hover:text-crimson-light hover:bg-crimson/5'
                     }`}
                   >
                     {item.label}
                   </Link>
                 );
               }
-              // Ne montrer les ancres que sur la page d'accueil
               if (location.pathname !== '/') {
                 return null;
               }
@@ -212,8 +208,8 @@ function Nav() {
                   onClick={(e) => handleNavClick(e, item.href, false)}
                   className={`text-base font-medium px-4 py-3 rounded-lg transition-all duration-300 ${
                     isActive
-                      ? 'text-sky-400 bg-sky-400/10 border-l-4 border-sky-400'
-                      : 'text-gray-300 hover:text-sky-400 hover:bg-sky-400/5'
+                      ? 'text-crimson-light bg-crimson/10 border-l-4 border-crimson'
+                      : 'text-washi/70 hover:text-crimson-light hover:bg-crimson/5'
                   }`}
                 >
                   {item.label}
@@ -225,7 +221,7 @@ function Nav() {
                 openWhatsapp();
                 setMobileMenuOpen(false);
               }}
-              className="glass-effect text-sky-400 hover:text-purple-400 px-4 py-3 rounded-lg border border-sky-400/30 hover:border-sky-400/60 transition-all duration-300 flex items-center justify-center space-x-2 font-semibold mt-2"
+              className="glass-effect text-gold hover:text-crimson-light px-4 py-3 rounded-lg border border-gold/30 hover:border-crimson/60 transition-all duration-300 flex items-center justify-center space-x-2 font-semibold mt-2"
             >
               <FaWhatsappSquare className="text-lg" />
               <span>Me contacter</span>
@@ -233,7 +229,7 @@ function Nav() {
           </nav>
         </div>
       </header>
-      
+
       {/* Spacer pour le header fixe */}
       <div className="h-16 sm:h-20 md:h-24"></div>
     </>
