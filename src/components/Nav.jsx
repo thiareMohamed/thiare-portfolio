@@ -89,13 +89,13 @@ function Nav() {
 
   return (
     <>
-      <header className={`glass-effect mx-2 sm:mx-4 md:mx-20 rounded-xl md:rounded-2xl py-2 md:py-3 mt-2 md:mt-3 items-center justify-between px-3 md:px-6 transition-all duration-300 fixed top-0 left-0 right-0 z-50 ${scrolled ? 'shadow-[0_8px_32px_rgba(200,16,46,0.3)] border-gold/40 backdrop-blur-xl' : 'border-gold/20 backdrop-blur-md'}`}>
+      <header className={`glass-effect mx-2 sm:mx-4 md:mx-20 rounded-xl md:rounded-2xl py-2 md:py-3 mt-2 md:mt-3 items-center justify-between px-3 md:px-6 transition-all duration-300 fixed top-0 left-0 right-0 z-50 ${scrolled ? 'shadow-[0_8px_32px_rgba(56,140,224,0.3)] border-gold/40 backdrop-blur-xl' : 'border-gold/20 backdrop-blur-md'}`}>
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" onClick={() => setMobileMenuOpen(false)} className="relative group flex items-center gap-2">
             <div className="absolute inset-0 bg-gradient-to-r from-crimson/20 to-gold/20 rounded-lg blur-sm group-hover:blur-md transition-all duration-300"></div>
             <span className="hanko text-base sm:text-lg w-8 h-8 sm:w-9 sm:h-9 relative z-10 group-hover:scale-110 transition-transform duration-300" aria-hidden="true">侍</span>
-            <img src={logo} alt="logo" className="h-5 sm:h-6 md:h-8 relative z-10 drop-shadow-[0_0_10px_rgba(200,16,46,0.5)] transition-transform duration-300 group-hover:scale-110" />
+            <img src={logo} alt="logo" className="h-5 sm:h-6 md:h-8 relative z-10 drop-shadow-[0_0_10px_rgba(56,140,224,0.5)] transition-transform duration-300 group-hover:scale-110" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -149,7 +149,7 @@ function Nav() {
             {/* Bouton Contact */}
             <button
               onClick={openWhatsapp}
-              className="ml-4 glass-effect text-gold hover:text-crimson-light px-4 py-2 rounded-lg border border-gold/30 hover:border-crimson/60 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(200,16,46,0.4)] flex items-center space-x-2 text-sm font-semibold"
+              className="ml-4 glass-effect text-gold hover:text-crimson-light px-4 py-2 rounded-lg border border-gold/30 hover:border-crimson/60 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(56,140,224,0.4)] flex items-center space-x-2 text-sm font-semibold"
             >
               <FaWhatsappSquare className="text-lg" />
               <span className="hidden xl:inline">Contact</span>

@@ -16,7 +16,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* Encre sumi : noir profond avec dégradé chaud */
   background:
-    radial-gradient(circle at 50% -10%, rgba(200, 16, 46, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 50% -10%, rgba(56, 140, 224, 0.18) 0%, transparent 45%),
     linear-gradient(160deg, #0a0807 0%, #14100e 45%, #0d0a09 100%);
   background-attachment: fixed;
   color: #f3ead8;
@@ -44,7 +44,7 @@ body::before {
   inset: 0;
   background-image:
     radial-gradient(circle at 100% 50%, transparent 20%, rgba(212, 175, 55, 0.015) 21%, rgba(212, 175, 55, 0.015) 34%, transparent 35%, transparent),
-    radial-gradient(circle at 0% 50%, transparent 20%, rgba(200, 16, 46, 0.02) 21%, rgba(200, 16, 46, 0.02) 34%, transparent 35%, transparent);
+    radial-gradient(circle at 0% 50%, transparent 20%, rgba(56, 140, 224, 0.02) 21%, rgba(56, 140, 224, 0.02) 34%, transparent 35%, transparent);
   background-size: 60px 60px;
   background-position: 0 0, 30px 30px;
   opacity: 0.6;
@@ -61,7 +61,7 @@ body::after {
   transform: translateX(-50%);
   width: 70vmax;
   height: 70vmax;
-  background: radial-gradient(circle, rgba(200, 16, 46, 0.12) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(56, 140, 224, 0.12) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -83,8 +83,8 @@ code {
 
 @keyframes katana-glow {
   0%, 100% {
-    box-shadow: 0 0 18px rgba(200, 16, 46, 0.45),
-                0 0 36px rgba(200, 16, 46, 0.22);
+    box-shadow: 0 0 18px rgba(56, 140, 224, 0.45),
+                0 0 36px rgba(56, 140, 224, 0.22);
   }
   50% {
     box-shadow: 0 0 26px rgba(212, 175, 55, 0.6),
@@ -125,14 +125,14 @@ code {
 /* Texte lumineux rouge/or façon lame */
 .neon-text {
   text-shadow:
-    0 0 10px rgba(200, 16, 46, 0.55),
-    0 0 22px rgba(200, 16, 46, 0.3),
+    0 0 10px rgba(56, 140, 224, 0.55),
+    0 0 22px rgba(56, 140, 224, 0.3),
     0 1px 0 rgba(0, 0, 0, 0.6);
 }
 
 /* Dégradé rouge -> or */
 .gradient-text {
-  background: linear-gradient(120deg, #e23b4e 0%, #c8102e 40%, #d4af37 100%);
+  background: linear-gradient(120deg, #4d9de0 0%, #1e5fa8 40%, #d4af37 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -154,7 +154,7 @@ code {
 
 .hover-lift:hover {
   transform: translateY(-8px);
-  box-shadow: 0 16px 40px rgba(200, 16, 46, 0.28);
+  box-shadow: 0 16px 40px rgba(56, 140, 224, 0.28);
 }
 
 /* Sceau Hanko (cachet rouge) */
@@ -162,12 +162,12 @@ code {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #c8102e;
-  color: #e23b4e;
+  border: 2px solid #1e5fa8;
+  color: #4d9de0;
   border-radius: 0.5rem;
   font-family: 'Shippori Mincho', serif;
   letter-spacing: 0.1em;
-  background: rgba(200, 16, 46, 0.08);
+  background: rgba(56, 140, 224, 0.08);
 }
 
 /* Trait de pinceau sous les titres */
@@ -183,7 +183,7 @@ code {
   bottom: -0.55rem;
   width: 70%;
   height: 6px;
-  background: linear-gradient(90deg, transparent, #c8102e 20%, #d4af37 80%, transparent);
+  background: linear-gradient(90deg, transparent, #1e5fa8 20%, #d4af37 80%, transparent);
   border-radius: 50%;
   filter: blur(0.4px);
   opacity: 0.85;
@@ -200,8 +200,8 @@ code {
 
 /* Disque "soleil levant" */
 .rising-sun {
-  background: radial-gradient(circle, #e23b4e 0%, #c8102e 55%, #7a0e1e 100%);
-  box-shadow: 0 0 60px rgba(200, 16, 46, 0.5);
+  background: radial-gradient(circle, #4d9de0 0%, #1e5fa8 55%, #0c2f5e 100%);
+  box-shadow: 0 0 60px rgba(56, 140, 224, 0.5);
 }
 
 /* Scrollbar */
@@ -212,14 +212,14 @@ code {
   background: #0a0807;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #c8102e, #d4af37);
+  background: linear-gradient(180deg, #1e5fa8, #d4af37);
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #e23b4e, #e6c34d);
+  background: linear-gradient(180deg, #4d9de0, #e6c34d);
 }
 
 ::selection {
-  background: rgba(200, 16, 46, 0.4);
+  background: rgba(56, 140, 224, 0.4);
   color: #f3ead8;
 }

@@ -46,7 +46,7 @@ function Hero() {
             <a href={CV}
               target='_blank'
               rel='noopener noreferrer'
-              className='w-full sm:w-auto flex space-x-2 items-center justify-center bg-gradient-to-r from-crimson to-crimson-dark text-washi px-6 py-3 rounded-xl border border-crimson/50 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(200,16,46,0.6)] font-semibold text-sm md:text-base'>
+              className='w-full sm:w-auto flex space-x-2 items-center justify-center bg-gradient-to-r from-crimson to-crimson-dark text-washi px-6 py-3 rounded-xl border border-crimson/50 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(56,140,224,0.6)] font-semibold text-sm md:text-base'>
               <span>Télécharger mon CV</span>
               <FaCloudDownloadAlt className='text-lg' />
             </a>
@@ -61,7 +61,7 @@ function Hero() {
           {/* Social Icons */}
           <div className="flex justify-center md:justify-start space-x-4 pt-3">
             <a href="https://www.linkedin.com/in/mohamed-thiare-b49b03214/"
-              className='text-2xl text-gold hover:text-crimson-light transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_15px_rgba(200,16,46,0.8)]'
+              className='text-2xl text-gold hover:text-crimson-light transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_15px_rgba(56,140,224,0.8)]'
               target='_blank'
               rel='noopener noreferrer'
               aria-label="LinkedIn">
@@ -71,14 +71,14 @@ function Hero() {
               target='_blank'
               rel='noopener noreferrer'
               aria-label="GitHub"
-              className='text-2xl text-gold hover:text-crimson-light transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_15px_rgba(200,16,46,0.8)]'>
+              className='text-2xl text-gold hover:text-crimson-light transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_15px_rgba(56,140,224,0.8)]'>
               <FaGithubSquare />
             </a>
             <a href="https://twitter.com/ThiareMohamed29"
               target='_blank'
               rel='noopener noreferrer'
               aria-label="Twitter"
-              className='text-2xl text-gold hover:text-crimson-light transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_15px_rgba(200,16,46,0.8)]'>
+              className='text-2xl text-gold hover:text-crimson-light transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_15px_rgba(56,140,224,0.8)]'>
               <FaTwitterSquare />
             </a>
           </div>
