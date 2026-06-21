@@ -22,7 +22,7 @@ function About() {
         <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 justify-center items-center px-4 sm:px-10 py-5 mt-10 relative z-10'>
           <div className='text-center glass-effect border rounded-xl md:rounded-2xl border-crimson/30 p-6 md:p-8 hover-lift hover:border-crimson/60 transition-all duration-300 group'>
             <div className='mb-3 md:mb-4 transform group-hover:scale-110 transition-transform duration-300'>
-              <img src={ProjectsIcon} alt='Expérience' className='m-auto w-12 h-12 md:w-16 md:h-16 drop-shadow-[0_0_15px_rgba(200,16,46,0.5)]' />
+              <img src={ProjectsIcon} alt='Expérience' className='m-auto w-12 h-12 md:w-16 md:h-16 drop-shadow-[0_0_15px_rgba(56,140,224,0.5)]' />
             </div>
             <span className='text-xs md:text-sm text-crimson-light font-semibold block mb-2'>+4 ans</span>
             <h3 className='text-xl md:text-2xl font-bold gradient-text' style={{ fontFamily: 'Cinzel, serif' }}>Expérience</h3>
@@ -38,7 +38,7 @@ function About() {
 
           <div className='text-center glass-effect border rounded-xl md:rounded-2xl border-crimson/30 p-6 md:p-8 hover-lift hover:border-crimson/60 transition-all duration-300 group'>
             <div className='mb-3 md:mb-4 transform group-hover:scale-110 transition-transform duration-300'>
-              <img src={DesignIcon} alt='Leadership' className='m-auto w-12 h-12 md:w-16 md:h-16 drop-shadow-[0_0_15px_rgba(200,16,46,0.5)]' />
+              <img src={DesignIcon} alt='Leadership' className='m-auto w-12 h-12 md:w-16 md:h-16 drop-shadow-[0_0_15px_rgba(56,140,224,0.5)]' />
             </div>
             <span className='text-xs md:text-sm text-crimson-light font-semibold block mb-2'>Lead Tech</span>
             <h3 className='text-xl md:text-2xl font-bold gradient-text' style={{ fontFamily: 'Cinzel, serif' }}>Leadership</h3>
@@ -51,7 +51,7 @@ function About() {
         <div className='relative mb-6 sm:mb-0 mx-auto sm:mx-0'>
           <div className='absolute inset-0 rising-sun rounded-full blur-2xl opacity-50 animate-[pulse-soft_5s_ease-in-out_infinite]'></div>
           <div className='relative border-2 md:border-4 border-gold/50 rounded-full p-1.5 md:p-2 hover:border-crimson transition-all duration-300 hover:scale-105'>
-            <img src={ThiarePhoto} alt="Mohamed THIARE" className='rounded-full w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 object-cover drop-shadow-[0_0_30px_rgba(200,16,46,0.5)]' />
+            <img src={ThiarePhoto} alt="Mohamed THIARE" className='rounded-full w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 object-cover drop-shadow-[0_0_30px_rgba(56,140,224,0.5)]' />
           </div>
           <span className='hanko absolute -bottom-2 -right-2 w-12 h-12 text-lg rotate-6' aria-hidden="true">武</span>
         </div>

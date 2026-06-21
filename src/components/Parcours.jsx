@@ -180,7 +180,7 @@ function Parcours() {
 
                 {/* Nœud central */}
                 <div className='hidden md:flex md:w-0 items-center justify-center relative'>
-                  <span className='absolute w-4 h-4 rounded-full bg-crimson border-2 border-gold shadow-[0_0_15px_rgba(200,16,46,0.7)] -translate-x-1/2'></span>
+                  <span className='absolute w-4 h-4 rounded-full bg-crimson border-2 border-gold shadow-[0_0_15px_rgba(56,140,224,0.7)] -translate-x-1/2'></span>
                 </div>
 
                 <div className='hidden md:block md:w-1/2'></div>

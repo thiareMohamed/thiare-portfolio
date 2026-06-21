@@ -238,7 +238,7 @@ function Contact() {
             <button
               type='submit'
               disabled={isSubmitting}
-              className='w-full glass-effect border-2 border-crimson/50 rounded-xl px-6 py-4 text-gold hover:text-crimson-light font-semibold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(200,16,46,0.6)] hover:border-crimson/70 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed'
+              className='w-full glass-effect border-2 border-crimson/50 rounded-xl px-6 py-4 text-gold hover:text-crimson-light font-semibold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(56,140,224,0.6)] hover:border-crimson/70 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed'
             >
               {isSubmitting ? (
                 <>

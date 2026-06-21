@@ -6,11 +6,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Palette Samouraï
+        // Palette Samouraï bleu (indigo "ai/kon" + or)
         crimson: {
-          light: '#e23b4e',
-          DEFAULT: '#c8102e', // shu - rouge vermillon
-          dark: '#7a0e1e',
+          light: '#4d9de0',
+          DEFAULT: '#1e5fa8', // ai - bleu indigo
+          dark: '#0c2f5e',
         },
         gold: {
           light: '#e6c34d',
