@@ -120,7 +120,7 @@ function Parcours() {
       year: '2017 – 2018',
       title: 'Baccalauréat',
       company: 'Lycée Valdiodio NDIAYE — Kaolack, Sénégal',
-      description: 'Baccalauréat général.'
+      description: 'Baccalauréat'
     }
   ];
 
