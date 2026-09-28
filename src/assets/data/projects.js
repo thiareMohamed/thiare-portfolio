@@ -5,7 +5,7 @@ import marchePublic from '../images/marche_public.png';
 import lohiFoundation from '../images/lohifoundation.png';
 import bookfighters from '../images/bookfighters.png';
 import visionStats from '../images/vision_stats.png';
-import samaGokh from '../images/samagokh.png';
+import samaGokh from '../images/samagokh.webp';
 
 // `short` : titre affiché dans la liste · `category` : [fr, en]
 export const Projects = [
