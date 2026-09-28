@@ -1,43 +1,42 @@
-import React from 'react';
-import Nav from '../components/Nav';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import About from '../components/About';
+import Blog from '../components/Blog';
+import Career from '../components/Career';
 import Contact from '../components/Contact';
-import Footer from '../components/Footer';
 import Hero from '../components/Hero';
-import Parcours from '../components/Parcours';
-import Project from '../components/Project';
-import Skills from '../components/Skills';
+import Projects from '../components/Projects';
+import SEO from '../components/SEO';
 import Services from '../components/Services';
+import StackMarquee from '../components/StackMarquee';
+import { scrollToSection } from '../components/ui';
 
 function Home() {
+  const { state } = useLocation();
+
+  // Arrivée depuis une autre page via un lien de la nav
+  useEffect(() => {
+    if (!state || !state.scrollTo) return undefined;
+    const id = setTimeout(() => scrollToSection(state.scrollTo), 50);
+    return () => clearTimeout(id);
+  }, [state]);
+
   return (
-    <div className="App">
-      <Nav />
-      <section id="home">
-        <Hero />
-      </section>
-      <section id="about">
-        <About />
-      </section>
-      <section id="services">
-        <Services />
-      </section>
-      <section id="projects">
-        <Project />
-      </section>
-      <section id="skills">
-        <Skills />
-      </section>
-      <section id="parcours">
-        <Parcours />
-      </section>
-      <section id="contact">
-        <Contact />
-      </section>
-      <Footer />
-    </div>
+    <main>
+      <SEO
+        title='Mohamed THIARE - Lead Tech & Développeur Full-Stack | Portfolio'
+        description='Portfolio de Mohamed THIARE, Lead Tech & Développeur Full-Stack basé à Dakar. Architectures web et mobiles modernes, robustes et scalables.'
+      />
+      <Hero />
+      <StackMarquee />
+      <About />
+      <Services />
+      <Projects />
+      <Career />
+      <Blog />
+      <Contact />
+    </main>
   );
 }
 
 export default Home;
-

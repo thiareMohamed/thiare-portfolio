@@ -1,15 +1,18 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import '../assets/css/App.css';
+import useReveal from '../hooks/useReveal';
 import Home from '../pages/Home';
 import Blog from '../pages/Blog';
+import BlogPost from './BlogPost';
+import Cursor from './Cursor';
+import { LangProvider } from './LangContext';
+import Nav from './Nav';
 
 function App() {
-  // SEO - Titre par défaut
+  useReveal();
+
   useEffect(() => {
-    document.title = 'Mohamed THIARE - Lead Tech & Développeur Full-Stack | Portfolio';
-    
-    // Ajouter les données structurées JSON-LD pour le SEO
+    // Données structurées JSON-LD pour le SEO
     const script = document.createElement('script');
     script.type = 'application/ld+json';
     script.text = JSON.stringify({
@@ -35,47 +38,27 @@ function App() {
         "name": "Institut Supérieur d'Informatique"
       },
       "knowsAbout": [
-        "Lead Tech",
-        "Architecture logicielle",
-        "Développement Web",
-        "Développement Mobile",
-        "Nuxt.js",
-        "Next.js",
-        "Angular",
-        "Vue.js",
-        "React",
-        "Flutter",
-        "NestJS",
-        "Spring Boot",
-        "Java",
-        "Kafka",
-        "PostgreSQL",
-        "MongoDB",
-        "MinIO",
-        "Docker",
-        "Portainer",
-        "CI/CD",
-        "DevOps"
+        "Lead Tech", "Architecture logicielle", "Développement Web", "Développement Mobile",
+        "Nuxt.js", "Next.js", "Angular", "Vue.js", "React", "Flutter", "NestJS", "Spring Boot",
+        "Java", "Kafka", "PostgreSQL", "MongoDB", "MinIO", "Docker", "Portainer", "CI/CD", "DevOps"
       ]
     });
     document.head.appendChild(script);
-    
-    return () => {
-      // Nettoyer le script lors du démontage
-      const existingScript = document.querySelector('script[type="application/ld+json"]');
-      if (existingScript) {
-        existingScript.remove();
-      }
-    };
+    return () => script.remove();
   }, []);
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<Blog />} />
-      </Routes>
-    </Router>
+    <LangProvider>
+      <Router>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+        </Routes>
+        <Cursor />
+      </Router>
+    </LangProvider>
   );
 }
 

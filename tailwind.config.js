@@ -5,30 +5,28 @@ module.exports = {
   ],
   theme: {
     extend: {
+      // Thème « Le Dōjō » : fond encre, un seul accent vermillon
       colors: {
-        // Palette Samouraï bleu (indigo "ai/kon" + or)
-        crimson: {
-          light: '#4d9de0',
-          DEFAULT: '#1e5fa8', // ai - bleu indigo
-          dark: '#0c2f5e',
-        },
-        gold: {
-          light: '#e6c34d',
-          DEFAULT: '#d4af37', // kin - or
-          dark: '#9c7c1e',
-        },
-        ember: '#e85d2f',
-        washi: '#f3ead8', // papier japonais
-        sumi: {
-          light: '#241c18',
-          DEFAULT: '#14100e', // encre noire
-          dark: '#0a0807',
-        },
+        ink: 'oklch(0.13 0.006 40)',
+        surface: 'oklch(0.17 0.008 40)',
+        paper: 'oklch(0.94 0.012 80)',
+        soft: 'oklch(0.84 0.012 75)', // texte des paragraphes « lead »
+        muted: 'oklch(0.72 0.012 70)',
+        line: 'oklch(1 0 0 / 0.09)',
+        vermilion: 'oklch(0.66 0.21 36)',
+        'on-vermilion': 'oklch(0.14 0.01 40)',
       },
       fontFamily: {
-        display: ['Cinzel', 'serif'],
-        samurai: ['"Shippori Mincho"', 'serif'],
-        zen: ['"Zen Kaku Gothic New"', 'sans-serif'],
+        sans: ['Archivo', 'sans-serif'],
+        display: ['Archivo', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+        kanji: ['"Shippori Mincho"', 'serif'],
+      },
+      screens: {
+        nav: '900px',
+      },
+      transitionTimingFunction: {
+        dojo: 'cubic-bezier(.2,.7,.2,1)',
       },
     },
   },
