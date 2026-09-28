@@ -1,3 +1,4 @@
+import teralink from '../images/teralink.webp';
 import topatoko from '../images/topatoko.png';
 import viziPass from '../images/vizi_pass.png';
 import marchePublic from '../images/marche_public.png';
@@ -12,6 +13,7 @@ export const Projects = [
     id: 10,
     title: 'Teralink',
     url: 'https://teralink.sn',
+    image: teralink,
     category: ['Plateforme · Fondateur', 'Platform · Founder'],
     stacks: ['Nuxt 3', 'NestJS', 'Flutter', 'PostgreSQL', 'MinIO'],
     description: "Plateforme de réservation en ligne multiplateforme conçue et développée de bout en bout en tant que fondateur. Application web Nuxt 3, backend NestJS couplé à PostgreSQL, application mobile native Flutter et stockage objet sécurisé via MinIO.",
