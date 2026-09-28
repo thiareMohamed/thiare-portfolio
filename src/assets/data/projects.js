@@ -1,4 +1,7 @@
 import teralink from '../images/teralink.webp';
+import dexpay from '../images/dexpay.webp';
+import dexchangeSms from '../images/dexchange_sms.webp';
+import dexchangeTransfert from '../images/dexchange_transfert.webp';
 import topatoko from '../images/topatoko.png';
 import viziPass from '../images/vizi_pass.png';
 import marchePublic from '../images/marche_public.png';
@@ -18,6 +21,36 @@ export const Projects = [
     stacks: ['Nuxt 3', 'NestJS', 'Flutter', 'PostgreSQL', 'MinIO'],
     description: "Plateforme de réservation en ligne multiplateforme conçue et développée de bout en bout en tant que fondateur. Application web Nuxt 3, backend NestJS couplé à PostgreSQL, application mobile native Flutter et stockage objet sécurisé via MinIO.",
     descriptionEn: 'Cross-platform online booking platform designed and built end to end as founder. Nuxt 3 web app, NestJS backend with PostgreSQL, native Flutter mobile app and secure object storage with MinIO.'
+  },
+  {
+    id: 11,
+    title: 'DexPay',
+    url: 'https://dexpay.africa',
+    image: dexpay,
+    category: ['Fintech · Paiement', 'Fintech · Payments'],
+    stacks: [],
+    description: "Infrastructure de paiement pour l'Afrique de l'Ouest et centrale : encaissements, versements, règlement des factures d'eau et d'électricité et vente de crédit téléphonique, avec un seul compte et une seule intégration. Connectée aux principaux opérateurs mobile money ainsi qu'à Visa et Mastercard.",
+    descriptionEn: 'Payment infrastructure for West and Central Africa: collections, payouts, water and electricity bill payments and airtime sales, through a single account and a single integration. Connected to the main mobile money operators as well as Visa and Mastercard.'
+  },
+  {
+    id: 12,
+    title: 'Dexchange SMS',
+    url: 'https://dexchange-sms.com/fr',
+    image: dexchangeSms,
+    category: ['Messagerie · API', 'Messaging · API'],
+    stacks: [],
+    description: "Plateforme de messagerie professionnelle pour communiquer avec ses clients partout en Afrique de l'Ouest : SMS unitaires, campagnes en masse, codes OTP et notifications WhatsApp depuis une seule API.",
+    descriptionEn: 'Business messaging platform to reach customers across West Africa: single SMS, bulk campaigns, OTP codes and WhatsApp notifications from a single API.'
+  },
+  {
+    id: 13,
+    title: 'Dexchange Transfert',
+    url: 'https://dexchange-transfert.com',
+    image: dexchangeTransfert,
+    category: ['Fintech · Transfert', 'Fintech · Transfers'],
+    stacks: [],
+    description: "Application de transfert d'argent entre services mobile money (Wave…), achat de crédit, PayPal et achat de crypto, avec un mode invité pour les petites transactions sans création de compte.",
+    descriptionEn: 'Money transfer app across mobile money services (Wave…), plus airtime, PayPal and crypto purchases, with a guest mode for small transactions without an account.'
   },
   {
     id: 1,
