@@ -23,6 +23,13 @@ const md = {
       ? <code className={`font-mono ${className}`} {...props} />
       : <code className='font-mono text-[0.9em] bg-surface border border-line rounded-md px-[6px] py-[2px]' {...props} />,
   hr: () => <hr className='border-0 border-t border-line my-10' />,
+  table: ({ node, ...props }) => (
+    <div className='overflow-x-auto mb-6 border border-line rounded-2xl'>
+      <table className='w-full border-collapse text-[15px] text-left' {...props} />
+    </div>
+  ),
+  th: ({ node, ...props }) => <th className='mono-label mono-sm text-muted font-normal px-4 py-3 border-b border-line bg-surface' {...props} />,
+  td: ({ node, ...props }) => <td className='text-soft px-4 py-3 border-b border-line align-top' {...props} />,
 };
 
 function BlogPost() {
