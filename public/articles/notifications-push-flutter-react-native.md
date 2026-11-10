@@ -1,79 +1,79 @@
-# Notifications push sur Android et iOS : le guide complet pour Flutter et React Native
+# Notifications push sur Android et iOS avec Flutter et React Native
 
-Les notifications push font partie des fonctionnalités qu'on croit simples jusqu'au moment de les brancher : une clé Apple au mauvais endroit, un canal Android oublié, un token jamais rafraîchi… et plus rien n'arrive. Ce guide reprend toute la chaîne, de la console Apple jusqu'à l'envoi depuis votre backend, pour **Flutter** et **React Native** (CLI et Expo).
+Ce guide suit l'ordre dans lequel les choses se configurent : Apple, Firebase, l'application, puis le backend. Il couvre Flutter, React Native (CLI) et Expo.
 
-## 1. Comprendre l'architecture avant de coder
+## 1. Architecture
 
-Une notification push ne part jamais directement de votre serveur vers le téléphone. Elle passe toujours par le service du système :
+Une notification push ne va jamais directement du serveur au téléphone. Elle passe par le service de la plateforme :
 
-- **iOS** : APNs (*Apple Push Notification service*)
-- **Android** : FCM (*Firebase Cloud Messaging*), intégré aux Google Play Services
+- iOS : APNs (*Apple Push Notification service*)
+- Android : FCM (*Firebase Cloud Messaging*), intégré aux Google Play Services
 
-Pour éviter de gérer deux intégrations, on utilise en pratique **FCM comme point d'entrée unique** : votre backend parle uniquement à FCM, et FCM relaie vers APNs pour les appareils iOS.
+Pour ne pas maintenir deux intégrations, on passe en général par FCM pour les deux plateformes. Le backend n'appelle que FCM, qui transmet à APNs pour les appareils iOS.
 
 ```
 Backend ──► FCM (HTTP v1) ──┬──► Android (Play Services)
                             └──► APNs ──► iOS
 ```
 
-Le flux est toujours le même :
+Dans l'ordre :
 
 1. L'app demande la permission à l'utilisateur.
-2. L'app récupère un **token d'appareil** (FCM token).
-3. L'app envoie ce token à **votre backend**, qui le stocke (lié à l'utilisateur et à l'appareil).
+2. L'app récupère un token d'appareil (FCM token).
+3. L'app envoie ce token au backend, qui le stocke avec l'utilisateur et l'appareil.
 4. Le backend envoie un message à FCM en ciblant ce token (ou un *topic*).
 5. Le système affiche la notification, ou réveille l'app pour la traiter.
 
 ### Message « notification » ou message « data » ?
 
-C'est la distinction qui cause le plus de confusion :
+Le type de message détermine qui affiche la notification :
 
 | Type | Contenu | App en arrière-plan / fermée | App au premier plan |
 |---|---|---|---|
-| **Notification** | `notification: { title, body }` | Affichée automatiquement par le système | **Non affichée** : c'est à vous de le faire |
-| **Data** | `data: { ... }` uniquement | Transmise à votre handler en arrière-plan (non garantie sur iOS) | Transmise à votre listener |
-| **Mixte** | Les deux | Affichée, `data` disponible au clic | Listener avec les deux |
+| Notification | `notification: { title, body }` | Affichée par le système | Non affichée, c'est à l'app de le faire |
+| Data | `data: { ... }` uniquement | Transmise à votre handler en arrière-plan (non garantie sur iOS) | Transmise à votre listener |
+| Mixte | Les deux | Affichée, `data` disponible au clic | Listener avec les deux |
 
-Retenez surtout : **au premier plan, rien ne s'affiche tout seul sur Android**. Il faut une librairie de notifications locales pour afficher la bannière.
+Sur Android, une notification reçue pendant que l'app est ouverte ne s'affiche donc pas. Il faut passer par une librairie de notifications locales.
 
 ## 2. Prérequis communs
 
-- Un **projet Firebase** (gratuit).
-- Un **compte Apple Developer payant** : sans lui, pas de push sur iOS.
-- Un **appareil iOS réel** recommandé. Le simulateur reçoit les push distantes depuis Xcode 14 (macOS 13+, Mac Apple Silicon ou T2), mais un vrai iPhone reste la référence pour valider.
-- L'**identifiant de bundle iOS** et le **package Android** définitifs de votre app : ils sont liés à la configuration Firebase.
+- Un projet Firebase (gratuit).
+- Un compte Apple Developer payant, obligatoire pour les push sur iOS.
+- Un iPhone de test. Le simulateur reçoit les push distantes depuis Xcode 14 (macOS 13+, Mac Apple Silicon ou T2), mais mieux vaut valider sur un vrai appareil.
+- Le bundle ID iOS et le package Android définitifs, puisque la configuration Firebase en dépend.
 
 ## 3. Configuration Apple (APNs)
 
-C'est l'étape qu'on oublie le plus souvent. Elle se fait une seule fois par compte développeur.
+Cette partie se fait une seule fois par compte développeur.
 
 ### 3.1 Créer une clé APNs (.p8)
 
-1. Allez sur **developer.apple.com → Certificates, Identifiers & Profiles → Keys**.
-2. Cliquez sur **+**, nommez la clé et cochez **Apple Push Notifications service (APNs)**.
-3. Téléchargez le fichier `.p8`. **Il n'est téléchargeable qu'une seule fois** : rangez-le dans votre gestionnaire de secrets.
-4. Notez le **Key ID** (affiché sur la page de la clé) et votre **Team ID** (en haut à droite du compte).
+1. Sur developer.apple.com, ouvrez Certificates, Identifiers & Profiles → Keys.
+2. Cliquez sur +, nommez la clé et cochez Apple Push Notifications service (APNs).
+3. Téléchargez le fichier `.p8`. Apple ne le propose qu'une fois, gardez-le dans un gestionnaire de secrets.
+4. Notez le Key ID (sur la page de la clé) et le Team ID (en haut à droite du compte).
 
-Préférez la clé `.p8` aux anciens certificats `.p12` : elle n'expire pas, fonctionne pour tous vos apps et couvre à la fois les environnements de développement et de production.
+La clé `.p8` remplace les anciens certificats `.p12`. Elle n'expire pas, sert pour toutes les apps du compte et fonctionne en développement comme en production.
 
 ### 3.2 Activer la capacité Push sur l'App ID
 
-Dans **Identifiers**, ouvrez l'App ID de votre application et vérifiez que **Push Notifications** est cochée. Avec la signature automatique de Xcode, l'ajout de la capacité (voir plus bas) le fait pour vous.
+Dans Identifiers, ouvrez l'App ID de l'application et vérifiez que Push Notifications est cochée. Avec la signature automatique de Xcode, ajouter la capacité dans le projet (voir plus bas) suffit.
 
 ### 3.3 Relier la clé à Firebase
 
-Dans la console Firebase : **Paramètres du projet → Cloud Messaging → Configuration de l'application Apple → Clé d'authentification APNs**. Importez le `.p8` avec le Key ID et le Team ID.
+Dans la console Firebase, allez dans Paramètres du projet → Cloud Messaging → Configuration de l'application Apple → Clé d'authentification APNs, puis importez le `.p8` avec le Key ID et le Team ID.
 
-Sans cette étape, l'app iOS obtiendra un token FCM, mais aucun message ne sera jamais délivré.
+Si cette étape manque, l'app iOS reçoit bien un token FCM mais aucun message n'arrive.
 
 ## 4. Configuration Firebase
 
-1. Dans la console Firebase, ajoutez une **app Android** (avec le package exact, ex. `com.monentreprise.monapp`) et une **app iOS** (avec le bundle ID exact).
+1. Dans la console Firebase, ajoutez une app Android avec le package exact (par exemple `com.monentreprise.monapp`) et une app iOS avec le bundle ID exact.
 2. Récupérez les fichiers de configuration :
    - `google-services.json` pour Android
    - `GoogleService-Info.plist` pour iOS
 
-Avec Flutter, la CLI FlutterFire fait tout ça pour vous (section suivante).
+Avec Flutter, la CLI FlutterFire s'en charge (section suivante).
 
 ## 5. Flutter
 
@@ -90,10 +90,7 @@ flutterfire configure
 
 ### 5.2 Côté iOS (Xcode)
 
-Ouvrez `ios/Runner.xcworkspace` puis, dans **Signing & Capabilities** de la cible Runner :
-
-- ajoutez **Push Notifications** ;
-- ajoutez **Background Modes** et cochez **Remote notifications**.
+Ouvrez `ios/Runner.xcworkspace`. Dans Signing & Capabilities de la cible Runner, ajoutez Push Notifications, puis Background Modes avec l'option Remote notifications cochée.
 
 ### 5.3 Côté Android
 
@@ -114,7 +111,7 @@ Dans `android/app/src/main/AndroidManifest.xml`, déclarez la permission requise
 </manifest>
 ```
 
-L'icône `ic_notification` doit être **blanche sur fond transparent** : Android ignore les couleurs et affiche un carré blanc si l'icône est opaque.
+L'icône `ic_notification` doit être blanche sur fond transparent. Android n'utilise que la transparence de l'image, une icône opaque s'affiche comme un carré blanc.
 
 Les versions récentes de `flutter_local_notifications` demandent aussi le *desugaring* Java dans `android/app/build.gradle.kts` :
 
@@ -132,7 +129,7 @@ dependencies {
 
 ### 5.4 Initialisation et handler d'arrière-plan
 
-Le handler d'arrière-plan doit être une **fonction de premier niveau** (hors de toute classe), annotée pour ne pas être supprimée à la compilation :
+Le handler d'arrière-plan doit être une fonction de premier niveau, hors de toute classe, avec l'annotation `@pragma('vm:entry-point')` pour qu'elle ne soit pas supprimée en build release :
 
 ```dart
 import 'package:firebase_core/firebase_core.dart';
@@ -155,7 +152,7 @@ Future<void> main() async {
 }
 ```
 
-### 5.5 Un service de notifications complet
+### 5.5 Le service de notifications
 
 ```dart
 import 'dart:io';
@@ -257,11 +254,11 @@ class PushService {
 }
 ```
 
-Quelques points importants :
+Sur iOS, il faut appeler `getAPNSToken()` avant `getToken()`, sinon le premier lancement échoue avec l'erreur `apns-token-not-set`.
 
-- **`getAPNSToken()` avant `getToken()` sur iOS** : sinon vous obtiendrez l'erreur `apns-token-not-set` au premier lancement.
-- **`onTokenRefresh`** : le token change (réinstallation, restauration, nettoyage des données). Le backend doit toujours avoir la dernière version.
-- Sur iOS, `setForegroundNotificationPresentationOptions` suffit pour afficher la bannière au premier plan : inutile de passer par les notifications locales.
+Le token peut changer après une réinstallation, une restauration ou un effacement des données. `onTokenRefresh` sert à renvoyer la nouvelle valeur au backend.
+
+Sur iOS, `setForegroundNotificationPresentationOptions` suffit pour afficher la bannière quand l'app est ouverte, sans passer par les notifications locales.
 
 ### 5.6 Topics
 
@@ -307,7 +304,7 @@ apply plugin: "com.google.gms.google-services"
 
 ### 6.3 iOS
 
-1. Ajoutez `GoogleService-Info.plist` à la cible de l'app **depuis Xcode** (glisser-déposer avec « Copy items if needed »), pas seulement dans le dossier.
+1. Ajoutez `GoogleService-Info.plist` à la cible de l'app depuis Xcode (glisser-déposer avec « Copy items if needed »). Le copier dans le dossier ne suffit pas.
 2. Dans `ios/Podfile`, Firebase doit être compilé en framework statique :
 
 ```ruby
@@ -324,7 +321,7 @@ import FirebaseCore
 FirebaseApp.configure()
 ```
 
-4. Installez les pods, puis ajoutez dans Xcode les capacités **Push Notifications** et **Background Modes → Remote notifications** :
+4. Installez les pods, puis ajoutez dans Xcode les capacités Push Notifications et Background Modes → Remote notifications :
 
 ```bash
 cd ios && pod install
@@ -332,7 +329,7 @@ cd ios && pod install
 
 ### 6.4 Handler d'arrière-plan
 
-Il doit être enregistré **dans `index.js`, avant `AppRegistry`**, en dehors de tout composant :
+Il s'enregistre dans `index.js`, avant `AppRegistry.registerComponent` et en dehors de tout composant :
 
 ```js
 import { AppRegistry } from 'react-native';
@@ -347,7 +344,7 @@ setBackgroundMessageHandler(getMessaging(), async (remoteMessage) => {
 AppRegistry.registerComponent(appName, () => App);
 ```
 
-Les exemples utilisent l'**API modulaire** (`getMessaging()`, `getToken(messaging)`…), qui remplace l'ancienne syntaxe `messaging().getToken()` dans les versions récentes de React Native Firebase.
+Les exemples utilisent l'API modulaire (`getMessaging()`, `getToken(messaging)`…). L'ancienne syntaxe `messaging().getToken()` est dépréciée dans les versions récentes de React Native Firebase.
 
 ### 6.5 Permission, token et écoute des messages
 
@@ -414,7 +411,7 @@ async function sendTokenToBackend(token) {
 
 ### 6.6 Afficher les notifications au premier plan
 
-Comme avec Flutter, FCM n'affiche rien quand l'app est ouverte. La solution la plus courante est **Notifee** :
+Comme avec Flutter, rien ne s'affiche quand l'app est ouverte. On utilise généralement Notifee pour ça :
 
 ```bash
 npm install @notifee/react-native
@@ -443,11 +440,11 @@ export async function displayForegroundNotification(remoteMessage) {
 }
 ```
 
-`createChannel` peut être appelé plusieurs fois sans risque : si le canal existe déjà, il est simplement réutilisé.
+On peut appeler `createChannel` à chaque fois : si le canal existe déjà, il est réutilisé.
 
 ## 7. React Native avec Expo
 
-Avec Expo, `expo-notifications` gère à la fois la permission, le token et l'affichage.
+Avec Expo, `expo-notifications` gère la permission, le token et l'affichage.
 
 ### 7.1 Installation et configuration
 
@@ -474,7 +471,7 @@ Dans `app.json` :
 }
 ```
 
-**Attention : Expo Go ne permet plus de tester les push distantes sur Android.** Il faut un *development build* :
+Expo Go ne permet plus de tester les push distantes sur Android. Il faut un *development build* :
 
 ```bash
 npx expo run:android
@@ -525,10 +522,9 @@ export async function registerForPush() {
 }
 ```
 
-Deux options pour l'envoi :
+Pour l'envoi, on peut passer par le service push d'Expo avec le token `ExponentPushToken[...]` : un `POST https://exp.host/--/api/v2/push/send`, et Expo s'occupe de FCM et d'APNs.
 
-- **Expo Push Service** avec le token `ExponentPushToken[...]` : un simple `POST https://exp.host/--/api/v2/push/send`, Expo se charge de FCM et APNs.
-- **Tokens natifs** via `Notifications.getDevicePushTokenAsync()` : vous envoyez vous-même via FCM (Android) et APNs (iOS).
+L'autre option est de récupérer les tokens natifs avec `Notifications.getDevicePushTokenAsync()` et d'envoyer soi-même via FCM (Android) et APNs (iOS).
 
 Pour écouter les interactions :
 
@@ -544,11 +540,9 @@ const opened = Notifications.addNotificationResponseReceivedListener((r) => {
 
 ### 8.1 L'API FCM HTTP v1
 
-L'ancienne API « legacy » (clé serveur) a été **arrêtée en 2024**. Il faut désormais utiliser **HTTP v1**, authentifiée par un **compte de service** :
+L'ancienne API « legacy » (clé serveur) a été arrêtée en 2024. On utilise maintenant HTTP v1, authentifiée par un compte de service. La clé se génère dans la console Firebase : Paramètres du projet → Comptes de service → Générer une nouvelle clé privée.
 
-**Console Firebase → Paramètres du projet → Comptes de service → Générer une nouvelle clé privée.**
-
-Ce fichier JSON donne un accès administrateur à votre projet : ne le commitez jamais, injectez-le via vos variables d'environnement ou un gestionnaire de secrets.
+Ce fichier JSON donne un accès administrateur au projet. Il ne doit pas être commité : passez-le par une variable d'environnement ou un gestionnaire de secrets.
 
 ### 8.2 Node.js / NestJS avec firebase-admin
 
@@ -645,12 +639,13 @@ Pour réveiller l'app iOS sans afficher de notification, le message doit conteni
 }
 ```
 
-iOS **limite fortement** ces messages (quelques-uns par heure) et ne les délivre pas si l'utilisateur a forcé la fermeture de l'app. Ne bâtissez jamais une fonctionnalité critique dessus.
+iOS limite ces messages à quelques-uns par heure et ne les délivre pas si l'utilisateur a fermé l'app de force. Ils ne conviennent pas à une fonctionnalité critique.
 
-## 9. Tester efficacement
+## 9. Tester
 
-- **Console Firebase → Messaging → Nouvelle campagne → Envoyer un message test** : collez le token FCM affiché dans vos logs.
-- **Simulateur iOS** : vous pouvez simuler une notification sans serveur avec un fichier `.apns` :
+Le plus rapide est la console Firebase : Messaging → Nouvelle campagne → Envoyer un message test, avec le token FCM récupéré dans les logs.
+
+Sur le simulateur iOS, un fichier `.apns` permet de simuler une notification sans serveur :
 
 ```json
 {
@@ -663,21 +658,17 @@ iOS **limite fortement** ces messages (quelques-uns par heure) et ne les délivr
 xcrun simctl push booted com.monentreprise.monapp notification.apns
 ```
 
-(ou glissez simplement le fichier sur la fenêtre du simulateur).
+On peut aussi glisser le fichier sur la fenêtre du simulateur.
 
-- Testez les **trois états** pour chaque plateforme : app au premier plan, en arrière-plan, et complètement fermée. Chacun passe par un chemin de code différent.
+Testez chaque plateforme app ouverte, en arrière-plan et fermée : ce sont trois chemins de code différents.
 
-## 10. Les pièges les plus fréquents
+## 10. Problèmes fréquents
 
-1. **Rien n'arrive sur iOS** : la clé APNs n'est pas importée dans Firebase, ou les capacités *Push Notifications* / *Remote notifications* manquent dans Xcode.
-2. **Rien ne s'affiche quand l'app est ouverte** : comportement normal sur Android. Affichez la notification vous-même (flutter_local_notifications, Notifee, expo-notifications).
-3. **Carré blanc à la place de l'icône** : l'icône de notification Android doit être monochrome blanche sur fond transparent.
-4. **Pas de son ni de bannière sur Android** : le canal a été créé avec une importance trop basse. Un canal ne peut plus être modifié après sa création : changez son identifiant ou demandez à l'utilisateur de réinstaller.
-5. **Plus aucune notification après une mise à jour Android 13** : la permission `POST_NOTIFICATIONS` n'est ni déclarée ni demandée.
-6. **Notifications perdues sur certains Android** (Xiaomi, Huawei, Oppo…) : leurs optimisations de batterie tuent les apps en arrière-plan. Envoyez en priorité `high` et guidez l'utilisateur vers les réglages de batterie si nécessaire.
-7. **Tokens fantômes en base** : supprimez les tokens qui renvoient `registration-token-not-registered`, et mettez à jour le token à chaque `onTokenRefresh`.
-8. **Valeurs `data` non textuelles** : FCM n'accepte que des chaînes dans `data`. Sérialisez vos objets en JSON.
-
-## Conclusion
-
-Une fois la chaîne comprise, la configuration devient mécanique : **clé APNs → Firebase → permission → token → backend → FCM HTTP v1**. Isolez toute la logique dans un service dédié côté mobile et côté serveur, traitez systématiquement les trois états de l'app, et gardez votre base de tokens propre : vos notifications arriveront de façon fiable sur Android comme sur iOS.
+1. Rien n'arrive sur iOS : la clé APNs n'est pas importée dans Firebase, ou il manque les capacités Push Notifications / Remote notifications dans Xcode.
+2. Rien ne s'affiche quand l'app est ouverte : c'est le comportement normal sur Android. Il faut afficher la notification soi-même (flutter_local_notifications, Notifee, expo-notifications).
+3. Un carré blanc à la place de l'icône : l'icône de notification Android doit être blanche sur fond transparent.
+4. Pas de son ni de bannière sur Android : le canal a été créé avec une importance trop basse. Un canal ne se modifie plus après sa création, il faut changer son identifiant (ou réinstaller l'app).
+5. Plus aucune notification depuis Android 13 : la permission `POST_NOTIFICATIONS` n'est pas déclarée ou pas demandée.
+6. Notifications perdues sur certains Android (Xiaomi, Huawei, Oppo…) : leurs optimisations de batterie arrêtent les apps en arrière-plan. Envoyez en priorité `high` et, si besoin, expliquez à l'utilisateur comment exclure l'app de ces optimisations.
+7. Des tokens morts en base : supprimez ceux qui renvoient `registration-token-not-registered` et mettez le token à jour à chaque `onTokenRefresh`.
+8. Une erreur sur le champ `data` : FCM n'y accepte que des chaînes. Sérialisez les objets en JSON.
