@@ -3,6 +3,18 @@
 
 module.exports.Articles = [
   {
+    id: 4,
+    slug: 'notifications-push-flutter-react-native',
+    title: 'Notifications push sur Android et iOS : le guide complet pour Flutter et React Native',
+    excerpt: 'APNs, FCM, permissions, tokens, canaux Android et envoi via l\'API HTTP v1 : toute la chaîne pour configurer des notifications push fiables dans un projet Flutter, React Native ou Expo.',
+    author: 'Mohamed THIARE',
+    date: '2026-11-10',
+    readTime: '18 min',
+    category: 'Mobile',
+    tags: ['Flutter', 'React Native', 'Firebase', 'Notifications', 'iOS', 'Android'],
+    featured: true
+  },
+  {
     id: 1,
     slug: 'premiers-pas-avec-react',
     title: 'Premiers pas avec React : Guide pour débutants',
